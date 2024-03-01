@@ -1,3 +1,25 @@
 .button {
   display: inline-block;
+  box-sizing: border-box;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.primary {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.default {
+  color: var(--black);
+  background: none;
 }
