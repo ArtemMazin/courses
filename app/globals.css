@@ -20,6 +20,8 @@ a {
 :root {
   --black: #3b434e;
   --white: white;
+  --grey-light: #ebebeb;
+  --grey: #b3c0d9;
   --primary: #7653fc;
   --red: #fc836d;
   --green: #1dc37e;
