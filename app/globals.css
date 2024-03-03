@@ -10,6 +10,13 @@ body {
   overflow-x: hidden;
   color: var(--black);
   background: #f5f6f8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
+  scrollbar-gutter: stable;
+  text-rendering: optimizelegibility;
+  text-size-adjust: 100%;
 }
 
 a {
@@ -21,6 +28,7 @@ a {
   --black: #3b434e;
   --white: white;
   --grey-light: #ebebeb;
+  --grey-dark: #787d85;
   --grey: #b3c0d9;
   --primary: #7653fc;
   --red: #fc836d;
