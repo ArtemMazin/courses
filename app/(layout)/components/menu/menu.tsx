@@ -1,75 +1,50 @@
 'use client';
 
 import * as React from 'react';
-import { FirstLevelMenuItem, MenuItem, PageItem } from '@/interfaces/menu.interface';
-import { TopLevelCategory } from '@/interfaces/page.interface';
+import { FirstLevelMenuItem, MenuItem } from '@/interfaces/menu.interface';
 import { firstLevelMenu } from './utils/first-level-menu';
 import Link from 'next/link';
 import styles from './menu.module.css';
 import cn from 'classnames';
+import { usePathname } from 'next/navigation';
 
 export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
-  const [firstCategory, setFirstCategory] = React.useState(TopLevelCategory.Courses);
   const [secondCategory, setSecondCategory] = React.useState(initialMenu[0][0].pages[0].alias);
   const [thirdLevelMenuOpen, setThirdLevelMenuOpen] = React.useState(false);
-  const [secondLevelMenuOpen, setSecondLevelMenuOpen] = React.useState(true);
-  const [thirdCategory, setThirdCategory] = React.useState(initialMenu[0][0].pages[0].alias);
 
-  const openThirdLevelMenu = (activeCategory: string, pages: PageItem[]) => {
+  const path = usePathname();
+
+  const openThirdLevelMenu = (activeCategory: string) => {
     setThirdLevelMenuOpen(activeCategory === secondCategory ? !thirdLevelMenuOpen : true);
     setSecondCategory(activeCategory);
-    setThirdCategory(pages[0].alias);
   };
 
-  const openSecondLevelMenu = (activeCategory: TopLevelCategory) => {
-    setSecondLevelMenuOpen(activeCategory === firstCategory ? !secondLevelMenuOpen : true);
-    setFirstCategory(activeCategory);
-  };
-
-  const buildFirstLevelMenu = (
-    initialMenu: readonly MenuItem[][],
-    firstCategory: TopLevelCategory,
-    secondCategory: string,
-    thirdCategory: string
-  ) => {
+  const buildFirstLevelMenu = (initialMenu: readonly MenuItem[][]) => {
     return (
       <ul className={styles.firstLevelMenu}>
         {firstLevelMenu.map((firstLevelMenuItem) => (
           <li key={firstLevelMenuItem.id}>
-            {/* <Link
+            <Link
               href={`/${firstLevelMenuItem.route}`}
               className={cn(styles.firstLevelMenuItem, {
-                [styles.firstLevelMenuItemActive]: firstLevelMenuItem.id === firstCategory,
+                [styles.firstLevelMenuItemActive]: path.includes(firstLevelMenuItem.route),
               })}>
               {firstLevelMenuItem.icon}
-              <span onClick={() => openSecondLevelMenu(firstLevelMenuItem.id)}>{firstLevelMenuItem.name}</span>
-            </Link> */}
+              <span>{firstLevelMenuItem.name}</span>
+            </Link>
 
-            <div
-              className={cn(styles.firstLevelMenuItem, {
-                [styles.firstLevelMenuItemActive]: firstLevelMenuItem.id === firstCategory,
-              })}>
-              {firstLevelMenuItem.icon}
-              <span onClick={() => openSecondLevelMenu(firstLevelMenuItem.id)}>{firstLevelMenuItem.name}</span>
-            </div>
-
-            {buildSecondLevelMenu(initialMenu, firstLevelMenuItem, secondCategory, thirdCategory)}
+            {buildSecondLevelMenu(initialMenu, firstLevelMenuItem)}
           </li>
         ))}
       </ul>
     );
   };
 
-  const buildSecondLevelMenu = (
-    initialMenu: readonly MenuItem[][],
-    firstLevelMenuItem: FirstLevelMenuItem,
-    secondCategory: string,
-    thirdCategory: string
-  ) => {
+  const buildSecondLevelMenu = (initialMenu: readonly MenuItem[][], firstLevelMenuItem: FirstLevelMenuItem) => {
     return (
       <ul
         className={cn(styles.secondLevelMenu, {
-          [styles.secondLevelMenuOpen]: firstLevelMenuItem.id === firstCategory && secondLevelMenuOpen,
+          [styles.secondLevelMenuOpen]: path.includes(firstLevelMenuItem.route),
         })}>
         {initialMenu.map(
           (secondLevelMenuItem, i) =>
@@ -78,14 +53,13 @@ export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
               <li
                 key={secondLevelMenuItem._id.secondCategory}
                 className={cn(styles.secondLevelMenuItem, {
-                  [styles.secondLevelMenuItemActive]: secondLevelMenuItem._id.secondCategory === secondCategory,
+                  [styles.secondLevelMenuItemActive]: path.includes(secondLevelMenuItem._id.secondCategory),
                 })}>
-                <span
-                  onClick={() => openThirdLevelMenu(secondLevelMenuItem._id.secondCategory, secondLevelMenuItem.pages)}>
+                <span onClick={() => openThirdLevelMenu(secondLevelMenuItem._id.secondCategory)}>
                   {secondLevelMenuItem._id.secondCategory}
                 </span>
 
-                {buildThirdLevelMenu(secondLevelMenuItem, firstLevelMenuItem.route, thirdCategory)}
+                {buildThirdLevelMenu(secondLevelMenuItem, firstLevelMenuItem.route)}
               </li>
             ))
         )}
@@ -93,7 +67,7 @@ export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
     );
   };
 
-  const buildThirdLevelMenu = (secondLevelMenuItem: MenuItem, route: string, thirdCategory: string) => {
+  const buildThirdLevelMenu = (secondLevelMenuItem: MenuItem, route: string) => {
     return (
       <ul
         className={cn(styles.thirdLevelMenu, {
@@ -103,11 +77,8 @@ export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
           <li
             key={page._id}
             className={cn(styles.thirdLevelMenuItem, {
-              [styles.thirdLevelMenuItemActive]: page.alias === thirdCategory,
-            })}
-            onClick={() => {
-              setThirdCategory(page.alias);
-            }}>
+              [styles.thirdLevelMenuItemActive]: path.includes(`${route}/${page.alias}`),
+            })}>
             <Link href={`/${route}/${page.alias}`}>{page.category}</Link>
           </li>
         ))}
@@ -115,7 +86,5 @@ export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
     );
   };
 
-  return (
-    <div className={styles.menu}>{buildFirstLevelMenu(initialMenu, firstCategory, secondCategory, thirdCategory)}</div>
-  );
+  return <div className={styles.menu}>{buildFirstLevelMenu(initialMenu)}</div>;
 }

@@ -3,15 +3,17 @@ import { fetchPages } from '@/api/page';
 import * as React from 'react';
 import { firstLevelMenu } from '../../components/menu/utils/first-level-menu';
 import { MenuItem } from '@/interfaces/menu.interface';
+import { fetchProduct } from '@/api/product';
 
-export interface IServicesPageProps {
+export interface ICoursesPageProps {
   params: {
     alias: string;
   };
 }
 
 export async function generateStaticParams(): Promise<{ alias: string }[]> {
-  const menu = await fetchMenu(1);
+  const menu = await fetchMenu(0);
+
   if (!menu) {
     return [];
   }
@@ -23,11 +25,13 @@ export async function generateStaticParams(): Promise<{ alias: string }[]> {
   );
 }
 
-export default async function ServicesPage({ params }: IServicesPageProps) {
+export default async function CoursesPage({ params }: ICoursesPageProps) {
   const page = await fetchPages(params.alias);
-
   if (!page) {
     return <div>Page not found</div>;
   }
+
+  const products = await fetchProduct(page.category);
+
   return <div>{page.title}</div>;
 }
