@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { Menu } from '../components/menu/menu';
 import { fetchMenu } from '@/api/menu';
-import { TopLevelCategory } from '@/interfaces/page.interface';
 import { MenuItem } from '@/interfaces/menu.interface';
-import { firstLevelMenu } from '../components/menu/utils/first-level-menu';
 
 export interface ISidebarProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   className?: string;
 }
 
 export async function Sidebar({ className }: ISidebarProps) {
-  const initialMenu: Map<TopLevelCategory, MenuItem[]> = new Map();
+  const coursesMenu = await fetchMenu(0);
+  const servicesMenu = await fetchMenu(1);
+  const booksMenu = await fetchMenu(2);
+  const productsMenu = await fetchMenu(3);
+  const initialMenu: readonly MenuItem[][] = [coursesMenu, servicesMenu, booksMenu, productsMenu];
 
-  firstLevelMenu.forEach(async (item) => {
-    const items = await fetchMenu(item.id);
-    initialMenu.set(item.id, items);
-  });
+  if (!coursesMenu || !servicesMenu || !booksMenu || !productsMenu) {
+    return null;
+  }
 
   return (
     <div className={className}>
