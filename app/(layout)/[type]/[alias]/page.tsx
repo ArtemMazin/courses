@@ -8,21 +8,35 @@ import { fetchProduct } from '@/api/product';
 export interface ICoursesPageProps {
   params: {
     alias: string;
+    type: string;
   };
 }
 
-export async function generateStaticParams(): Promise<{ alias: string }[]> {
-  const menu = await fetchMenu(0);
-
-  if (!menu) {
-    return [];
+export async function generateStaticParams() {
+  interface Path {
+    type: string;
+    alias: string;
   }
 
-  return menu.flatMap((item) =>
-    item.pages.map((page) => ({
-      alias: page.alias,
-    }))
-  );
+  let path: Path[] = [];
+
+  for (const m of firstLevelMenu) {
+    const menu = await fetchMenu(m.id);
+    path = [
+      ...path,
+      ...menu.flatMap((item) =>
+        item.pages.map((page) => ({
+          type: m.route,
+          alias: page.alias,
+        }))
+      ),
+    ];
+  }
+
+  return path.map((p) => ({
+    type: p.type,
+    alias: p.alias,
+  }));
 }
 
 export default async function CoursesPage({ params }: ICoursesPageProps) {

@@ -1,5 +1,6 @@
 import { fetchMenu } from '@/api/menu';
 import * as React from 'react';
+import { firstLevelMenu } from '../components/menu/utils/first-level-menu';
 
 export interface ICoursesPageProps {
   params: {
@@ -7,18 +8,8 @@ export interface ICoursesPageProps {
   };
 }
 
-export async function generateStaticParams(): Promise<{ type: string }[]> {
-  const menu = await fetchMenu(0);
-
-  if (!menu) {
-    return [];
-  }
-
-  return menu.flatMap((item) =>
-    item.pages.map((page) => ({
-      type: page.alias,
-    }))
-  );
+export function generateStaticParams() {
+  return firstLevelMenu.map((m) => ({ type: m.route }));
 }
 
 export default function CoursesPage({ params }: ICoursesPageProps) {
