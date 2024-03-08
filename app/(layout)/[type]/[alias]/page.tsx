@@ -2,8 +2,10 @@ import { fetchMenu } from '@/api/menu';
 import { fetchPages } from '@/api/page';
 import * as React from 'react';
 import { firstLevelMenu } from '../../components/menu/utils/first-level-menu';
-import { MenuItem } from '@/interfaces/menu.interface';
+import Sort from '@/public/Sort.svg';
 import { fetchProduct } from '@/api/product';
+import { Htag, Tag } from '@/components';
+import styles from './page.module.css';
 
 export interface ICoursesPageProps {
   params: {
@@ -47,5 +49,21 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
 
   const products = await fetchProduct(page.category);
 
-  return <div>{page.title}</div>;
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.title}>
+          <Htag tag='h1'>{page.title}</Htag>
+          {products && <Tag color='grey'>{products.length}</Tag>}
+        </div>
+        <div className={styles.sort_container}>
+          <Sort />
+          <div className={styles.sort}>
+            <span>По рейтингу</span>
+            <span>По цене</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
