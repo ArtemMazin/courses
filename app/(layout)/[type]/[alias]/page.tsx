@@ -6,6 +6,7 @@ import Sort from '@/public/Sort.svg';
 import { fetchProduct } from '@/api/product';
 import { Htag, Tag } from '@/components';
 import styles from './page.module.css';
+import { HhData } from '@/components/hh-data/hh-data';
 
 export interface ICoursesPageProps {
   params: {
@@ -54,7 +55,13 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
       <div className={styles.container}>
         <div className={styles.title}>
           <Htag tag='h1'>{page.title}</Htag>
-          {products && <Tag color='grey'>{products.length}</Tag>}
+          {products && (
+            <Tag
+              color='grey'
+              size='medium'>
+              {products.length}
+            </Tag>
+          )}
         </div>
         <div className={styles.sort_container}>
           <Sort />
@@ -64,6 +71,20 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
           </div>
         </div>
       </div>
+      <div>
+        {products?.map((product) => (
+          <div key={product._id}>{product.title}</div>
+        ))}
+      </div>
+      <div className={styles.hhTitle}>
+        <Htag tag='h2'>Вакансии - {page.category}</Htag>
+        <Tag
+          color='red'
+          size='medium'>
+          hh.ru
+        </Tag>
+      </div>
+      {page.hh && <HhData {...page.hh} />}
     </div>
   );
 }
