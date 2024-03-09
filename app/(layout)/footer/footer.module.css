@@ -1,0 +1,13 @@
+.footer {
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.footer_links {
+  display: flex;
+  gap: 40px;
+  list-style-type: none;
+}

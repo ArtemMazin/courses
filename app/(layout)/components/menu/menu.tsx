@@ -2,11 +2,11 @@
 
 import * as React from 'react';
 import { FirstLevelMenuItem, MenuItem } from '@/interfaces/menu.interface';
-import { firstLevelMenu } from './utils/first-level-menu';
 import Link from 'next/link';
 import styles from './menu.module.css';
 import cn from 'classnames';
 import { usePathname } from 'next/navigation';
+import { firstLevelMenu } from '@/helpers/helpers';
 
 export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
   const [secondCategory, setSecondCategory] = React.useState(initialMenu[0][0].pages[0].alias);

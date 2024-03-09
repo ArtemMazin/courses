@@ -1,6 +1,6 @@
 import { fetchMenu } from '@/api/menu';
+import { firstLevelMenu } from '@/helpers/helpers';
 import * as React from 'react';
-import { firstLevelMenu } from '../components/menu/utils/first-level-menu';
 
 export interface ICoursesPageProps {
   params: {

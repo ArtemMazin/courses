@@ -1,12 +1,11 @@
 import { fetchMenu } from '@/api/menu';
 import { fetchPages } from '@/api/page';
 import * as React from 'react';
-import { firstLevelMenu } from '../../components/menu/utils/first-level-menu';
 import Sort from '@/public/Sort.svg';
 import { fetchProduct } from '@/api/product';
-import { Htag, Tag } from '@/components';
+import { Advantages, HhData, Htag, Ptag, Tag } from '@/components';
 import styles from './page.module.css';
-import { HhData } from '@/components/hh-data/hh-data';
+import { firstLevelMenu } from '@/helpers/helpers';
 
 export interface ICoursesPageProps {
   params: {
@@ -85,6 +84,32 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
         </Tag>
       </div>
       {page.hh && <HhData {...page.hh} />}
+      {page.advantages && page.advantages.length > 0 && (
+        <>
+          <Htag tag='h2'>Преимущества</Htag>
+          <Advantages advantages={page.advantages} />
+        </>
+      )}
+      {page.seoText && (
+        <div
+          className={styles.seo_text}
+          dangerouslySetInnerHTML={{ __html: page.seoText }}
+        />
+      )}
+      <Htag
+        tag='h2'
+        className={styles.skills_title}>
+        Получаемые навыки
+      </Htag>
+      {page.tags &&
+        page.tags.map((tag) => (
+          <Tag
+            key={tag}
+            color='primary'
+            size='medium'>
+            {tag}
+          </Tag>
+        ))}
     </div>
   );
 }

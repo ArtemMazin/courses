@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Menu } from '../components/menu/menu';
 import { fetchMenu } from '@/api/menu';
 import { MenuItem } from '@/interfaces/menu.interface';
-import { firstLevelMenu } from '../components/menu/utils/first-level-menu';
 import styles from './sidebar.module.css';
 import Logo from '@/public/Logo.svg';
-import { Search } from '@/components/search/search';
 import Link from 'next/link';
+import { Search } from '@/components';
+import { firstLevelMenu } from '@/helpers/helpers';
 
 export interface ISidebarProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   className?: string;

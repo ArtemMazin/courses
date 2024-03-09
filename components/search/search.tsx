@@ -3,8 +3,7 @@
 import * as React from 'react';
 import styles from './search.module.css';
 import cn from 'classnames';
-import { Input } from '../input/input';
-import { Button } from '..';
+import { Button, Input } from '..';
 import SearchIcon from '@/public/Search.svg';
 import { useRouter } from 'next/navigation';
 

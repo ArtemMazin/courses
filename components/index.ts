@@ -3,3 +3,8 @@ export { Htag } from './h-tag/h-tag';
 export { Ptag } from './p-tag/p-tag';
 export { Rating } from './rating/rating';
 export { Tag } from './tag/tag';
+export { Search } from './search/search';
+export { HhData } from './hh-data/hh-data';
+export { Card } from './card/card';
+export { Input } from './input/input';
+export { Advantages } from './advantages/advantages';

@@ -14,7 +14,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   scroll-padding-top: 20px;
-  scrollbar-gutter: stable;
   text-rendering: optimizelegibility;
   text-size-adjust: 100%;
 }

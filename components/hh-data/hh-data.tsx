@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Card } from '../card/card';
+
 import styles from './hh-data.module.css';
 import { HhData as HhDataProps } from '@/interfaces/page.interface';
 import Star from '@/public/Star.svg';
+import { Card } from '..';
+import { priceRu } from '@/helpers/helpers';
 
 export interface IHhDataProps extends HhDataProps {
   count: number;
@@ -18,7 +20,7 @@ export function HhData({ count, juniorSalary, middleSalary, seniorSalary }: IHhD
       <Card className={styles.salary}>
         <div>
           <span className={styles.title}>Начальный</span>
-          <div className={styles.salary_value}>{juniorSalary}</div>
+          <div className={styles.salary_value}>{priceRu(juniorSalary)}</div>
           <div className={styles.stars}>
             <Star className={styles.filled} />
             <Star />
@@ -27,7 +29,7 @@ export function HhData({ count, juniorSalary, middleSalary, seniorSalary }: IHhD
         </div>
         <div>
           <span className={styles.title}>Средний</span>
-          <div className={styles.salary_value}>{middleSalary}</div>
+          <div className={styles.salary_value}>{priceRu(middleSalary)}</div>
           <div className={styles.stars}>
             <Star className={styles.filled} />
             <Star className={styles.filled} />
@@ -36,7 +38,7 @@ export function HhData({ count, juniorSalary, middleSalary, seniorSalary }: IHhD
         </div>
         <div>
           <span className={styles.title}>Профессионал</span>
-          <div className={styles.salary_value}>{seniorSalary}</div>
+          <div className={styles.salary_value}>{priceRu(seniorSalary)}</div>
           <div className={styles.stars}>
             <Star className={styles.filled} />
             <Star className={styles.filled} />
