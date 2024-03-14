@@ -1,0 +1,6 @@
+.hhTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 24px;
+}

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import cn from 'classnames';
-import styles from './sort.module.css';
+import styles from './sort-button.module.css';
 import SortIcon from '@/public/Sort.svg';
 import { SortType } from '@/interfaces/page.interface';
 
@@ -11,7 +11,7 @@ export interface ISortProps extends React.DetailedHTMLProps<React.HTMLAttributes
   setSort: (sort: SortType) => void;
 }
 
-export function Sort({ sort, setSort, className, ...props }: ISortProps) {
+export function SortButton({ sort, setSort, className, ...props }: ISortProps) {
   return (
     <div
       className={cn(styles.sort, className)}

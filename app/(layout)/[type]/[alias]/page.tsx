@@ -2,10 +2,12 @@ import { fetchMenu } from '@/api/menu';
 import { fetchPages } from '@/api/page';
 import * as React from 'react';
 import { fetchProduct } from '@/api/product';
-import { Advantages, HhData, Htag, Tag } from '@/components';
-import styles from './page.module.css';
+import { Advantages } from '@/components';
 import { firstLevelMenu } from '@/helpers/helpers';
 import { Course } from '../../components/course/course';
+import { Vacancy } from '../../components/vacancy/vacancy';
+import { Skills } from '../../components/skills/skills';
+import { SeoText } from '../../components/seo-text/seo-text';
 
 export interface ICoursesPageProps {
   params: {
@@ -50,7 +52,7 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
   const products = await fetchProduct(page.category);
 
   return (
-    <div className={styles.wrapper}>
+    <>
       {products && (
         <Course
           products={products}
@@ -58,41 +60,13 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
         />
       )}
 
-      <div className={styles.hhTitle}>
-        <Htag tag='h2'>Вакансии - {page.category}</Htag>
-        <Tag
-          color='red'
-          size='medium'>
-          hh.ru
-        </Tag>
-      </div>
-      {page.hh && <HhData {...page.hh} />}
-      {page.advantages && page.advantages.length > 0 && (
-        <>
-          <Htag tag='h2'>Преимущества</Htag>
-          <Advantages advantages={page.advantages} />
-        </>
-      )}
-      {page.seoText && (
-        <div
-          className={styles.seo_text}
-          dangerouslySetInnerHTML={{ __html: page.seoText }}
-        />
-      )}
-      <Htag
-        tag='h2'
-        className={styles.skills_title}>
-        Получаемые навыки
-      </Htag>
-      {page.tags &&
-        page.tags.map((tag) => (
-          <Tag
-            key={tag}
-            color='primary'
-            size='medium'>
-            {tag}
-          </Tag>
-        ))}
-    </div>
+      <Vacancy page={page} />
+
+      {page.advantages && page.advantages.length > 0 && <Advantages advantages={page.advantages} />}
+
+      {page.seoText && <SeoText page={page} />}
+
+      {page.tags && <Skills page={page} />}
+    </>
   );
 }

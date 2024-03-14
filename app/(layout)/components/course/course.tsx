@@ -1,15 +1,16 @@
 'use client';
 
-import { Htag, Sort, Tag } from '@/components';
-import { sortReducer } from '@/components/sort/sort.reducer';
-import { SortType } from '@/interfaces/page.interface';
+import { Htag, Tag } from '@/components';
+import { sortReducer } from '@/app/(layout)/components/course/sort.reducer';
+import { SortType, TopPageModel } from '@/interfaces/page.interface';
 import { ProductModel } from '@/interfaces/product.interface';
 import styles from './course.module.css';
 import * as React from 'react';
+import { SortButton } from '@/components/sort-button/sort-button';
 
 export interface ICourseComponentProps {
   products: ProductModel[];
-  page: any;
+  page: TopPageModel;
 }
 
 export function Course({ products, page }: ICourseComponentProps) {
@@ -34,14 +35,16 @@ export function Course({ products, page }: ICourseComponentProps) {
             </Tag>
           )}
         </div>
-        <Sort
+        <SortButton
           sort={sort}
           setSort={setSort}
         />
       </div>
       <div>
         {sortedProducts?.map((product) => (
-          <div key={product._id}>{product.title}</div>
+          <div key={product._id}>
+            <span>{product.title}</span> <span>{product.price}</span> <span>{product.initialRating}</span>
+          </div>
         ))}
       </div>
     </>
