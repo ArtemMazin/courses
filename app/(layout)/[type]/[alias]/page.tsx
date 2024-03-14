@@ -1,11 +1,11 @@
 import { fetchMenu } from '@/api/menu';
 import { fetchPages } from '@/api/page';
 import * as React from 'react';
-import Sort from '@/public/Sort.svg';
 import { fetchProduct } from '@/api/product';
-import { Advantages, HhData, Htag, Ptag, Tag } from '@/components';
+import { Advantages, HhData, Htag, Tag } from '@/components';
 import styles from './page.module.css';
 import { firstLevelMenu } from '@/helpers/helpers';
+import { Course } from '../../components/course/course';
 
 export interface ICoursesPageProps {
   params: {
@@ -51,30 +51,13 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <div className={styles.title}>
-          <Htag tag='h1'>{page.title}</Htag>
-          {products && (
-            <Tag
-              color='grey'
-              size='medium'>
-              {products.length}
-            </Tag>
-          )}
-        </div>
-        <div className={styles.sort_container}>
-          <Sort />
-          <div className={styles.sort}>
-            <span>По рейтингу</span>
-            <span>По цене</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        {products?.map((product) => (
-          <div key={product._id}>{product.title}</div>
-        ))}
-      </div>
+      {products && (
+        <Course
+          products={products}
+          page={page}
+        />
+      )}
+
       <div className={styles.hhTitle}>
         <Htag tag='h2'>Вакансии - {page.category}</Htag>
         <Tag

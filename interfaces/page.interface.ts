@@ -5,6 +5,11 @@ export enum TopLevelCategory {
   Products,
 }
 
+export enum SortType {
+  Rating,
+  Price,
+}
+
 export interface TopPageAdvantage {
   _id: string;
   title: string;

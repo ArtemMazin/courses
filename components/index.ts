@@ -8,3 +8,4 @@ export { HhData } from './hh-data/hh-data';
 export { Card } from './card/card';
 export { Input } from './input/input';
 export { Advantages } from './advantages/advantages';
+export { Sort } from './sort/sort';

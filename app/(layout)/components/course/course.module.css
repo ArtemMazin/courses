@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
