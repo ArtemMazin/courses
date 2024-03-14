@@ -3,7 +3,7 @@ import styles from './vacancy.module.css';
 import { TopPageModel } from '@/interfaces/page.interface';
 import { HhData, Htag, Tag } from '@/components';
 
-export interface IHHProps {
+export interface IHHProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   page: TopPageModel;
 }
 

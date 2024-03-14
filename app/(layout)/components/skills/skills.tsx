@@ -3,7 +3,7 @@ import { TopPageModel } from '@/interfaces/page.interface';
 import styles from './skills.module.css';
 import * as React from 'react';
 
-export interface ISkillsProps {
+export interface ISkillsProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   page: TopPageModel;
 }
 

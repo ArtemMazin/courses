@@ -28,6 +28,7 @@ export async function Sidebar({ className }: ISidebarProps) {
         className={styles.logo}>
         <Logo />
       </Link>
+
       <Search />
 
       <Menu initialMenu={initialMenu} />

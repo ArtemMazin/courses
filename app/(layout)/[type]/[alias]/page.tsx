@@ -4,7 +4,7 @@ import * as React from 'react';
 import { fetchProduct } from '@/api/product';
 import { Advantages } from '@/components';
 import { firstLevelMenu } from '@/helpers/helpers';
-import { Course } from '../../components/course/course';
+import { Courses } from '../../components/courses/courses';
 import { Vacancy } from '../../components/vacancy/vacancy';
 import { Skills } from '../../components/skills/skills';
 import { SeoText } from '../../components/seo-text/seo-text';
@@ -54,7 +54,7 @@ export default async function CoursesPage({ params }: ICoursesPageProps) {
   return (
     <>
       {products && (
-        <Course
+        <Courses
           products={products}
           page={page}
         />

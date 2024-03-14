@@ -1,27 +1,33 @@
 'use client';
 
-import { Htag, Tag } from '@/components';
-import { sortReducer } from '@/app/(layout)/components/course/sort.reducer';
+import { Htag, SortButton, Tag } from '@/components';
+import { sortReducer } from '@/app/(layout)/components/courses/sort.reducer';
 import { SortType, TopPageModel } from '@/interfaces/page.interface';
 import { ProductModel } from '@/interfaces/product.interface';
-import styles from './course.module.css';
+import styles from './courses.module.css';
 import * as React from 'react';
-import { SortButton } from '@/components/sort-button/sort-button';
+import { Product } from '../product/product';
 
-export interface ICourseComponentProps {
+export interface ICourseComponentProps
+  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   products: ProductModel[];
   page: TopPageModel;
 }
 
-export function Course({ products, page }: ICourseComponentProps) {
+export function Courses({ products, page }: ICourseComponentProps) {
   const [{ products: sortedProducts, sort }, dispatch] = React.useReducer(sortReducer, {
-    sort: SortType.Price,
+    sort: SortType.Rating,
     products: products,
   });
 
   const setSort = (sort: SortType) => {
     dispatch({ type: sort });
   };
+
+  React.useEffect(() => {
+    setSort(SortType.Rating);
+  }, []);
+
   return (
     <>
       <div className={styles.container}>
@@ -43,7 +49,7 @@ export function Course({ products, page }: ICourseComponentProps) {
       <div>
         {sortedProducts?.map((product) => (
           <div key={product._id}>
-            <span>{product.title}</span> <span>{product.price}</span> <span>{product.initialRating}</span>
+            <Product product={product} />
           </div>
         ))}
       </div>

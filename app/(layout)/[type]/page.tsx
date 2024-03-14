@@ -1,4 +1,3 @@
-import { fetchMenu } from '@/api/menu';
 import { firstLevelMenu } from '@/helpers/helpers';
 import * as React from 'react';
 

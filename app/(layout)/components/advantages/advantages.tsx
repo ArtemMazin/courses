@@ -2,9 +2,10 @@ import * as React from 'react';
 import styles from './advantages.module.css';
 import { TopPageAdvantage } from '@/interfaces/page.interface';
 import Check from '@/public/Check.svg';
-import { Htag, Ptag } from '../../../../components';
+import { Htag, Ptag } from '@/components';
 
-export interface IAdvantagesProps {
+export interface IAdvantagesProps
+  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   advantages: TopPageAdvantage[];
 }
 

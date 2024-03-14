@@ -1,0 +1,32 @@
+.container {
+  padding: 30px 30px 13px;
+  margin-bottom: 30px;
+}
+
+.header {
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--grey-light);
+}
+
+.header_left {
+  display: grid;
+  grid-template-columns: 70px auto;
+  gap: 30px;
+}
+
+.header_title {
+  margin-bottom: 10px;
+}
+
+.header_tags {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.description {
+  margin-bottom: 14px;
+}

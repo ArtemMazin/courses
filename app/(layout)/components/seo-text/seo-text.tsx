@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './seo-text.module.css';
 import { TopPageModel } from '@/interfaces/page.interface';
 
-export interface ISeoTextProps {
+export interface ISeoTextProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   page: TopPageModel;
 }
 
