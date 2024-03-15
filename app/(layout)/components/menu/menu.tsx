@@ -15,9 +15,21 @@ export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
   const path = usePathname();
 
   const openThirdLevelMenu = (activeCategory: string) => {
-    setThirdLevelMenuOpen(activeCategory === secondCategory ? !thirdLevelMenuOpen : true);
+    setThirdLevelMenuOpen(true);
     setSecondCategory(activeCategory);
   };
+
+  React.useEffect(() => {
+    initialMenu.forEach((secondLevelMenu) => {
+      secondLevelMenu.map((item) => {
+        item.pages.map((page) => {
+          if (path.includes(page.alias)) {
+            openThirdLevelMenu(item._id.secondCategory);
+          }
+        });
+      });
+    });
+  }, []);
 
   const buildFirstLevelMenu = (initialMenu: readonly MenuItem[][]) => {
     return (

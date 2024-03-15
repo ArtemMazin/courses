@@ -1,4 +1,6 @@
+import { Htag } from '@/components';
 import { firstLevelMenu } from '@/helpers/helpers';
+import { redirect } from 'next/navigation';
 import * as React from 'react';
 
 export interface ICoursesPageProps {
@@ -12,5 +14,7 @@ export function generateStaticParams() {
 }
 
 export default function CoursesPage({ params }: ICoursesPageProps) {
-  return <div>{params.type + ' first-level'}</div>;
+  params.type === 'courses' && redirect('/courses/financial-analytics');
+  params.type === 'services' && redirect('/services/bookmakers');
+  return <Htag tag='h1'>{'Раздел ' + params.type + ' находится в разработке'}</Htag>;
 }

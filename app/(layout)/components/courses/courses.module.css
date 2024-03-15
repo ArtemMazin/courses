@@ -5,6 +5,7 @@
 }
 
 .title {
+  margin-bottom: 23px;
   display: flex;
   align-items: baseline;
   gap: 20px;

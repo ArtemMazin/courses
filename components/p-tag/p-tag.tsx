@@ -8,7 +8,7 @@ export interface IPtagProps
   size?: 's' | 'm' | 'l';
 }
 
-export function Ptag({ size, children, className, ...props }: IPtagProps) {
+export function Ptag({ size = 'm', children, className, ...props }: IPtagProps) {
   return (
     <p
       className={cn(

@@ -14,7 +14,7 @@ export const sortReducer = (state: SortReducerState, action: SortAction): SortRe
   switch (action.type) {
     case SortType.Price:
       return {
-        products: state.products.sort((a, b) => b.price - a.price),
+        products: state.products.sort((a, b) => a.price - b.price),
         sort: SortType.Price,
       };
     case SortType.Rating:

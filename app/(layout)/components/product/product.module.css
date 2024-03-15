@@ -30,3 +30,76 @@
 .description {
   margin-bottom: 14px;
 }
+
+.header_right {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  justify-self: end;
+  column-gap: 40px;
+}
+
+.header_right p {
+  font-weight: 300;
+}
+
+.price,
+.credit {
+  font-size: 20px;
+}
+
+.discount {
+  margin-left: 5px;
+}
+
+.credit span {
+  font-size: 14px;
+}
+
+.characteristics_container {
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--grey-light);
+}
+
+.characteristics_left {
+  margin-right: 60px;
+  list-style-type: none;
+}
+
+.characteristics_right span {
+  font-weight: 700;
+}
+
+.characteristic {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.characteristic div {
+  margin: 0 15px;
+  width: 100%;
+  border-bottom: 1px dashed #c4c4c4;
+}
+
+.characteristic p {
+  text-wrap: nowrap;
+  font-weight: 500;
+}
+
+.characteristic p:first-child {
+  font-weight: 700;
+}
+
+.advantages {
+  margin-bottom: 20px;
+  padding-left: 15px;
+  border-left: 2px solid var(--green);
+}
+
+.disadvantages {
+  padding-left: 15px;
+  border-left: 2px solid var(--red);
+}
