@@ -29,7 +29,7 @@ export function Menu({ initialMenu }: { initialMenu: readonly MenuItem[][] }) {
         });
       });
     });
-  }, []);
+  }, [path]);
 
   const buildFirstLevelMenu = (initialMenu: readonly MenuItem[][]) => {
     return (

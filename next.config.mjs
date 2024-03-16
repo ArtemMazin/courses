@@ -13,6 +13,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'old-images.hb.ru-msk.vkcs.cloud',
       },
+      {
+        protocol: 'https',
+        hostname: 'old-images.hb.ru-msk.vkcs.cloudhttp',
+      },
     ],
   },
 };
