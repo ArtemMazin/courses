@@ -107,7 +107,7 @@ export function Product({ product }: IProductProps) {
           </Button>
           <Button
             appearance='default'
-            arrow='right'
+            arrow={isReviewOpen ? 'down' : 'right'}
             className={styles.review_button}
             onClick={handleReviewOpen}>
             Читать отзывы

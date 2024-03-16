@@ -21,7 +21,7 @@ export function Button({ appearance, arrow = 'none', children, className, ...pro
       {...props}>
       {children}
       {arrow !== 'none' && (
-        <span className={cn(styles.arrow, styles[arrow])}>
+        <span className={cn(styles.arrow, { [styles.arrow_down]: arrow === 'down' })}>
           <Arrow />
         </span>
       )}

@@ -27,6 +27,11 @@
   font-weight: 700;
 }
 
+.header_right {
+  display: flex;
+  gap: 20px;
+}
+
 .description {
   padding-bottom: 18px;
   margin-bottom: 22px;
