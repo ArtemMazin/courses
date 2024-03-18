@@ -2,12 +2,12 @@ import { fetchMenu } from '@/api/menu';
 import { fetchPages } from '@/api/page';
 import * as React from 'react';
 import { fetchProduct } from '@/api/product';
-import { Advantages } from '@/components';
 import { firstLevelMenu } from '@/helpers/helpers';
 import { Courses } from '../../components/courses/courses';
 import { Vacancy } from '../../components/vacancy/vacancy';
 import { Skills } from '../../components/skills/skills';
 import { SeoText } from '../../components/seo-text/seo-text';
+import { Advantages } from '../../components/advantages/advantages';
 
 export interface ICoursesPageProps {
   params: {
