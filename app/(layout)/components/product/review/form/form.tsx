@@ -14,7 +14,12 @@ interface Inputs {
 }
 
 export function Form(props: IFormProps) {
-  const { control, handleSubmit } = useForm<Inputs>();
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
@@ -24,25 +29,40 @@ export function Form(props: IFormProps) {
       onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.form_head}>
         <div className={styles.form_inputs}>
-          <Input placeholder='Имя' />
-          <Input placeholder='Заголовок отзыва' />
+          <Input
+            placeholder='Имя'
+            error={errors.name}
+            {...register('name', { required: { value: true, message: 'Обязательное поле' } })}
+          />
+          <Input
+            placeholder='Заголовок отзыва'
+            error={errors.title}
+            {...register('title', { required: { value: true, message: 'Обязательное поле' } })}
+          />
         </div>
         <div className={styles.form_rating}>
           Оценка:
           <Controller
             control={control}
             name='rating'
-            render={({ field }) => (
+            rules={{ required: { value: true, message: 'Поставьте оценку' } }}
+            render={({ field: { onChange, value, ref } }) => (
               <Rating
-                rating={field.value}
-                onChange={field.onChange}
+                rating={value}
+                ref={ref}
+                error={errors.rating}
+                setRating={onChange}
                 isEditable
               />
             )}
           />
         </div>
       </div>
-      <TextArea placeholder='Текст отзыва' />
+      <TextArea
+        placeholder='Текст отзыва'
+        error={errors.text}
+        {...register('text', { required: { value: true, message: 'Обязательное поле' } })}
+      />
       <div className={styles.form_footer}>
         <Button
           appearance='primary'
