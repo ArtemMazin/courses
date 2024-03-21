@@ -1,4 +1,4 @@
-import { Button, Card, Input, Ptag, Rating, TextArea } from '@/components';
+import { Card, Ptag, Rating } from '@/components';
 import * as React from 'react';
 import styles from './review.module.css';
 import { ProductModel } from '@/interfaces/product.interface';
@@ -6,8 +6,9 @@ import User from '@/public/User.svg';
 import cn from 'classnames';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import { Form } from './form/form';
 
-export interface IReviewProps {
+export interface IReviewProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   product: ProductModel;
   isReviewOpen: boolean;
 }
@@ -50,30 +51,7 @@ export function Review({ product, isReviewOpen }: IReviewProps) {
           </li>
         ))}
       </ul>
-      <form className={styles.form}>
-        <div className={styles.form_head}>
-          <div className={styles.form_inputs}>
-            <Input placeholder='Имя' />
-            <Input placeholder='Заголовок отзыва' />
-          </div>
-          <div className={styles.form_rating}>
-            Оценка:
-            <Rating
-              rating={0}
-              isEditable
-            />
-          </div>
-        </div>
-        <TextArea placeholder='Текст отзыва' />
-        <div className={styles.form_footer}>
-          <Button
-            appearance='primary'
-            className={styles.form_button}>
-            Отправить
-          </Button>
-          <Ptag size='s'>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</Ptag>
-        </div>
-      </form>
+      <Form />
     </Card>
   );
 }

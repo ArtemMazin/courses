@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { priceRu } from '@/helpers/helpers';
 import { Review } from './review/review';
 
-export interface IProductProps {
+export interface IProductProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   product: ProductModel;
 }
 

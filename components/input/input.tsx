@@ -10,7 +10,6 @@ export interface IInputProps
 export function Input({ className, ...props }: IInputProps) {
   return (
     <input
-      type='text'
       className={cn(className, styles.input)}
       {...props}
     />
