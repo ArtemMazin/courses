@@ -3,25 +3,37 @@ import cn from 'classnames';
 import styles from './form.module.css';
 import { Button, Input, Ptag, Rating, TextArea } from '@/components';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { fetchReview } from '@/api/review';
+import { InputsForm } from '@/interfaces/product.interface';
 
-export interface IFormProps {}
-
-interface Inputs {
-  name: string;
-  title: string;
-  rating: number;
-  text: string;
+export interface IFormProps {
+  productId: string;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setFail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function Form(props: IFormProps) {
+export function Form({ productId, setSuccess, setFail }: IFormProps) {
   const {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<InputsForm>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<InputsForm> = async (data) => {
+    try {
+      const response = await fetchReview(productId, data);
+      if (response.message) {
+        setSuccess(true);
+        reset();
+      } else {
+        setFail(true);
+      }
+    } catch (error) {
+      setFail(true);
+    }
+  };
 
   return (
     <form
@@ -60,8 +72,8 @@ export function Form(props: IFormProps) {
       </div>
       <TextArea
         placeholder='Текст отзыва'
-        error={errors.text}
-        {...register('text', { required: { value: true, message: 'Обязательное поле' } })}
+        error={errors.description}
+        {...register('description', { required: { value: true, message: 'Обязательное поле' } })}
       />
       <div className={styles.form_footer}>
         <Button

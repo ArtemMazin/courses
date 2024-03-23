@@ -12,6 +12,18 @@ export interface IProductProps extends React.DetailedHTMLProps<React.HTMLAttribu
 
 export function Product({ product }: IProductProps) {
   const [isReviewOpen, setIsReviewOpen] = React.useState(false);
+  const reviewRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const review = reviewRef.current;
+    if (review && isReviewOpen) {
+      review.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isReviewOpen]);
+
+  const scrollToReview = () => {
+    setIsReviewOpen(true);
+  };
 
   const handleReviewOpen = () => {
     setIsReviewOpen(!isReviewOpen);
@@ -64,8 +76,13 @@ export function Product({ product }: IProductProps) {
             </div>
             <Ptag size='s'>цена</Ptag>
             <Ptag size='s'>в кредит</Ptag>
-            <Ptag size='s'>{product.reviewCount + ' отзывов'}</Ptag>
-            <div></div>
+
+            <Ptag
+              size='s'
+              onClick={scrollToReview}
+              className={styles.reviews_count}>
+              {product.reviewCount + ' отзывов'}
+            </Ptag>
           </div>
         </div>
         <Ptag className={styles.description}>{product.description}</Ptag>
@@ -117,6 +134,7 @@ export function Product({ product }: IProductProps) {
       <Review
         product={product}
         isReviewOpen={isReviewOpen}
+        ref={reviewRef}
       />
     </div>
   );

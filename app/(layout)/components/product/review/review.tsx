@@ -13,45 +13,76 @@ export interface IReviewProps extends React.DetailedHTMLProps<React.HTMLAttribut
   isReviewOpen: boolean;
 }
 
-export function Review({ product, isReviewOpen }: IReviewProps) {
-  return (
-    <Card
-      color='blue'
-      className={cn(styles.container, { [styles.open]: isReviewOpen })}>
-      <ul className={styles.reviews}>
-        {product.reviews.map((review) => (
-          <li key={review._id}>
-            <div className={styles.header}>
-              <div className={styles.header_left}>
-                <User />
-                <Ptag
-                  size='s'
-                  className={styles.name}>
-                  {review.name + ':'}
-                </Ptag>
-                <Ptag size='s'>{review.title}</Ptag>
-              </div>
-              <div className={styles.header_right}>
-                <Ptag
-                  size='s'
-                  className={styles.date}>
-                  {format(new Date(review.createdAt), 'dd MMMM yyyy', { locale: ru })}
-                </Ptag>
-                <div className={styles.rating}>
-                  <Rating rating={review.rating} />
+export const Review = React.forwardRef(
+  ({ product, isReviewOpen }: IReviewProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+    const [success, setSuccess] = React.useState(false);
+    const [fail, setFail] = React.useState(false);
+
+    return (
+      <Card
+        color='blue'
+        className={cn(styles.container, { [styles.open]: isReviewOpen })}
+        ref={ref}>
+        <ul className={styles.reviews}>
+          {product.reviews.map((review) => (
+            <li key={review._id}>
+              <div className={styles.header}>
+                <div className={styles.header_left}>
+                  <User />
+                  <Ptag
+                    size='s'
+                    className={styles.name}>
+                    {review.name + ':'}
+                  </Ptag>
+                  <Ptag size='s'>{review.title}</Ptag>
+                </div>
+                <div className={styles.header_right}>
+                  <Ptag
+                    size='s'
+                    className={styles.date}>
+                    {format(new Date(review.createdAt), 'dd MMMM yyyy', { locale: ru })}
+                  </Ptag>
+                  <div className={styles.rating}>
+                    <Rating rating={review.rating} />
+                  </div>
                 </div>
               </div>
-            </div>
 
+              <Ptag
+                size='s'
+                className={styles.description}>
+                {review.description}
+              </Ptag>
+            </li>
+          ))}
+        </ul>
+        <Form
+          productId={product._id}
+          setSuccess={setSuccess}
+          setFail={setFail}
+        />
+        {success && (
+          <div className={styles.success_container}>
             <Ptag
               size='s'
-              className={styles.description}>
-              {review.description}
+              className={styles.review_success}>
+              Ваш отзыв успешно отправлен
             </Ptag>
-          </li>
-        ))}
-      </ul>
-      <Form />
-    </Card>
-  );
-}
+          </div>
+        )}
+
+        {fail && (
+          <div className={styles.fail_container}>
+            <Ptag
+              size='s'
+              className={styles.review_fail}>
+              Что-то пошло не так. Пожалуйста, попробуйте еще раз.
+            </Ptag>
+          </div>
+        )}
+      </Card>
+    );
+  }
+);
+
+Review.displayName = 'Review';
