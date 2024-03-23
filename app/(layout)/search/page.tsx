@@ -8,5 +8,5 @@ export default function SearchPage(props: ISearchPageProps) {
 
   // const search = searchParams.get('query');
 
-  return <div>{/* {'search-params: ' + search} */}</div>;
+  return <div></div>;
 }

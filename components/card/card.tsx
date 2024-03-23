@@ -8,14 +8,19 @@ export interface ICardProps extends React.DetailedHTMLProps<React.HTMLAttributes
   children?: React.ReactNode;
 }
 
-export function Card({ color = 'white', className, children, ...props }: ICardProps) {
-  return (
-    <div
-      className={cn(styles.card, className, {
-        [styles.blue]: color === 'blue',
-      })}
-      {...props}>
-      {children}
-    </div>
-  );
-}
+export const Card = React.forwardRef<HTMLDivElement, ICardProps>(
+  ({ color = 'white', className, children, ...props }: ICardProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(styles.card, className, {
+          [styles.blue]: color === 'blue',
+        })}
+        {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
+Card.displayName = 'Card';

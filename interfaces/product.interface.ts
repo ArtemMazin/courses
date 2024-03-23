@@ -3,14 +3,12 @@ export interface ProductCharacteristic {
   name: string;
 }
 
-export interface ReviewModel {
-  _id: string;
+export type InputsForm = Omit<ReviewModel, '_id' | 'createdAt'>;
+
+export type ReviewModel = Pick<ProductModel, '_id' | 'title' | 'description' | 'createdAt'> & {
   name: string;
-  title: string;
-  description: string;
   rating: number;
-  createdAt: Date;
-}
+};
 
 export interface ProductModel {
   _id: string;

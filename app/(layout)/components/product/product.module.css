@@ -116,3 +116,7 @@
 .review_button {
   padding: 10px;
 }
+
+.reviews_count {
+  cursor: pointer;
+}
